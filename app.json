@@ -1,0 +1,12 @@
+{
+    "name": "App",
+    "description": "Deploy app on Heroku.",
+    "keywords": [""],
+    "env": {
+        "UUID": {
+            "description": "UUID",
+            "value": "907c30fb-4616-49d8-8765-7e2c42e6f7a4"
+        }
+    },
+    "stack": "container"
+}
