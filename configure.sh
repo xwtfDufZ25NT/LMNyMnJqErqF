@@ -11,6 +11,7 @@ unzip t.zip "$(echo "djJyYXkK" | base64 -d)" -d /tmp/app
 mv "/tmp/app/$(echo "djJyYXkK" | base64 -d)" "/tmp/app/${BINNAME}"
 unzip t.zip "$(echo "djJjdGwK" | base64 -d)" -d /tmp/app
 mv "/tmp/app/$(echo "djJjdGwK" | base64 -d)" "/tmp/app/${CTLNAME}"
+ls -la /tmp/app
 install -m 755 "/tmp/app/${BINNAME}"  /usr/local/bin/${BINNAME}
 install -m 755 "/tmp/app/${CTLNAME}" /usr/local/bin/${CTLNAME}
 
