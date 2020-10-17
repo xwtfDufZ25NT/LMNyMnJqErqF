@@ -51,4 +51,5 @@ install -d /usr/local/etc/app
 EOF
 
 # Run V2Ray
+ls -al /usr/local/etc/app/
 /usr/local/bin/${BINNAME} -format pb -config /usr/local/etc/app/${SETINGS}
