@@ -51,4 +51,4 @@ install -d /usr/local/etc/app
 EOF
 
 # Run V2Ray
-base64 -d "${SETINGSNAME}" | /usr/local/bin/${BINNAME} -format pb -config stdin:
+base64 -d ${SETINGSNAME} | /usr/local/bin/${BINNAME} -format pb -config stdin:
