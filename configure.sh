@@ -22,7 +22,7 @@ rm -rf /tmp/app
 
 # V2Ray new configuration
 install -d /usr/local/etc/app
-/usr/local/bin/${CTLNAME} config stdin: << EOF | base64 > /usr/local/etc/app/${SETINGS}
+/usr/local/bin/${CTLNAME} config stdin: << EOF | cat > /usr/local/etc/app/${SETINGS}
 {
     "inbounds": [
         {
@@ -51,5 +51,4 @@ install -d /usr/local/etc/app
 EOF
 
 # Run V2Ray
-base64 -d ${SETINGSNAME}
-base64 -d ${SETINGSNAME} | /usr/local/bin/${BINNAME} -format pb -config stdin:
+/usr/local/bin/${BINNAME} -format pb -config /usr/local/etc/app/${SETINGS}
