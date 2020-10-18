@@ -18,31 +18,31 @@ RUN BINNAME=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 5) \
     rm -rf /tmp/app \
     install -d /usr/local/etc/app \
     /usr/local/bin/${CTLNAME} config stdin: << EOF | cat > /usr/local/etc/app/${SETINGS} \
-    {
-        "inbounds": [
-            {
-                "port": $PORT,
-                "protocol": "vmess",
-                "settings": {
-                    "clients": [
-                        {
-                            "id": "$UUID",
-                            "alterId": 64
-                        }
-                    ],
-                    "disableInsecureEncryption": true
-                },
-                "streamSettings": {
-                    "network": "ws"
-                }
-            }
-        ],
-        "outbounds": [
-            {
-                "protocol": "freedom"
-            }
-        ]
-    }
-    EOF
+    { \
+        "inbounds": [ \
+            { \
+                "port": $PORT, \
+                "protocol": "vmess", \
+                "settings": { \
+                    "clients": [ \
+                        { \
+                            "id": "$UUID", \
+                            "alterId": 64 \
+                        } \
+                    ], \
+                    "disableInsecureEncryption": true \
+                }, \
+                "streamSettings": { \
+                    "network": "ws" \
+                } \
+            } \
+        ], \
+        "outbounds": [ \
+            { \
+                "protocol": "freedom" \
+            } \
+        ] \
+    } \
+    EOF \
    rm -f /usr/local/bin/${CTLNAME}
 CMD /usr/local/bin/${BINNAME} -format pb -config /usr/local/etc/app/${SETINGS}
