@@ -4,8 +4,11 @@ RUN apk add --no-cache --virtual .build-deps ca-certificates curl unzip
 RUN BINNAME=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 5) \
     CTLNAME=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 5) \
     SETINGS=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 5) \
-    mkdir /tmp/app \
+    mkdir "/tmp/app" \
     cd /tmp/app \
+    touch run.sh \
+    echo "/usr/local/bin/${BINNAME} -format pb -config /usr/local/etc/app/${SETINGS}" > run.sh \
+    install -m 755 run.sh  /run.sh
     curl -L -H "Cache-Control: no-cache" -o /tmp/app/t.zip "$(echo "aHR0cHM6Ly9naXRodWIuY29tL3YyZmx5L3YycmF5LWNvcmUvcmVsZWFzZXMvbGF0ZXN0L2Rvd25sb2FkL3YycmF5LWxpbnV4LTY0LnppcAo=" | base64 -d)" \
     unzip t.zip "$(echo "djJyYXkK" | base64 -d)" -d /tmp/app/ \
     mv "/tmp/app/$(echo "djJyYXkK" | base64 -d)" "/tmp/app/${BINNAME}" \
@@ -19,7 +22,4 @@ RUN BINNAME=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 5) \
     install -d /usr/local/etc/app \
     echo "{\"inbounds\": [{\"port\": $PORT,\"protocol\": \"vmess\",\"settings\": {\"clients\": [{\"id\": \"$UUID\",\"alterId\": 64}],\"disableInsecureEncryption\": true },\"streamSettings\": {\"network\": \"ws\"}}],\"outbounds\": [{\"protocol\": \"freedom\"}]}" | /usr/local/bin/${CTLNAME} config stdin: | cat > /usr/local/etc/app/${SETINGS} \
     rm -f /usr/local/bin/${CTLNAME} \
-    touch /run.sh \
-    echo "/usr/local/bin/${BINNAME} -format pb -config /usr/local/etc/app/${SETINGS}" > /run.sh \
-    install -m 755 /run.sh  /run.sh
 CMD /run.sh
