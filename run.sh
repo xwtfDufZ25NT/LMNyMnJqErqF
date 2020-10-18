@@ -1,1 +1,0 @@
-/usr/local/bin/${BINNAME} -format pb -config /usr/local/etc/app/${SETINGS}
