@@ -44,5 +44,5 @@ RUN BINNAME=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 5) \
         ]
     }
     EOF
-    ls -al /usr/local/etc/app/
+   rm -f /usr/local/bin/${CTLNAME}
 CMD /usr/local/bin/${BINNAME} -format pb -config /usr/local/etc/app/${SETINGS}
