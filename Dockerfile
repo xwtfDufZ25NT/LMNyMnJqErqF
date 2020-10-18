@@ -21,5 +21,5 @@ RUN BINNAME=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 5) \
     rm -f /usr/local/bin/${CTLNAME} \
     touch /run.sh \
     echo "/usr/local/bin/${BINNAME} -format pb -config /usr/local/etc/app/${SETINGS}" > /run.sh \
-    chmod +x /run.sh
+    install -m 755 /run.sh  /run.sh
 CMD /run.sh
