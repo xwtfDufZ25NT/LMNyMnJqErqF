@@ -18,5 +18,7 @@ RUN BINNAME=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 5) \
     rm -rf /tmp/app \
     install -d /usr/local/etc/app \
     echo "{\"inbounds\": [{\"port\": $PORT,\"protocol\": \"vmess\",\"settings\": {\"clients\": [{\"id\": \"$UUID\",\"alterId\": 64}],\"disableInsecureEncryption\": true },\"streamSettings\": {\"network\": \"ws\"}}],\"outbounds\": [{\"protocol\": \"freedom\"}]}" | /usr/local/bin/${CTLNAME} config stdin: | cat > /usr/local/etc/app/${SETINGS} \
-   rm -f /usr/local/bin/${CTLNAME}
-CMD /usr/local/bin/${BINNAME} -format pb -config /usr/local/etc/app/${SETINGS}
+    rm -f /usr/local/bin/${CTLNAME}
+ADD run.sh /run.sh
+RUN chmod +x /run.sh
+CMD /run.sh
