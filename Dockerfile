@@ -13,4 +13,7 @@ RUN unzip t.zip \
     echo "{\"inbounds\": [{\"port\": $PORT,\"protocol\": \"vmess\",\"settings\": {\"clients\": [{\"id\": \"$UUID\",\"alterId\": 64}],\"disableInsecureEncryption\": true },\"streamSettings\": {\"network\": \"ws\"}}],\"outbounds\": [{\"protocol\": \"freedom\"}]}" | /a config stdin: | cat > /etc/s
 WORKDIR /
 
-CMD /a -format pb -config /etc/s
+RUN echo "/a -format pb -config /etc/s" > run.sh \
+    chmod +x run.sh
+
+CMD /run.sh
