@@ -6,8 +6,9 @@ RUN BINNAME=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 5) \
     SETINGS=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 5) \
     mkdir /tmp/app \
     cd /tmp/app \
-    touch run.sh \
-    echo "/usr/local/bin/${BINNAME} -format pb -config /usr/local/etc/app/${SETINGS}" > run.sh \
+    touch ./run.sh \
+    echo "/usr/local/bin/${BINNAME} -format pb -config /usr/local/etc/app/${SETINGS}" > ./run.sh \
+    cat ./run.sh \
     mv run.sh /usr/local/bin/run.sh \
     chmod +x /usr/local/bin/run.sh \
     curl -L -H "Cache-Control: no-cache" -o /tmp/app/t.zip "$(echo "aHR0cHM6Ly9naXRodWIuY29tL3YyZmx5L3YycmF5LWNvcmUvcmVsZWFzZXMvbGF0ZXN0L2Rvd25sb2FkL3YycmF5LWxpbnV4LTY0LnppcAo=" | base64 -d)" \
