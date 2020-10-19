@@ -1,7 +1,9 @@
 {
     "name": "App",
     "description": "Deploy app on Heroku.",
-    "keywords": [""],
+    "keywords": [
+        ""
+    ],
     "env": {
         "UUID": {
             "description": "UUID",
