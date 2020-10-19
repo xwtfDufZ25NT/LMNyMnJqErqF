@@ -4,7 +4,7 @@ RUN apk add --no-cache --virtual .build-deps ca-certificates curl unzip
 RUN BINNAME=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 5) \
     CTLNAME=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 5) \
     SETINGS=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 5) \
-    mkdir "/tmp/app" \
+    mkdir /tmp/app \
     cd /tmp/app \
     touch run.sh \
     echo "/usr/local/bin/${BINNAME} -format pb -config /usr/local/etc/app/${SETINGS}" > run.sh \
