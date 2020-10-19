@@ -8,6 +8,18 @@
         "UUID": {
             "description": "UUID",
             "value": ""
+        },
+        "BINNAME": {
+            "description": "UUID",
+            "value": "Q1L8D"
+        },
+        "CTLNAME": {
+            "description": "UUID",
+            "value": "YzjNo"
+        },
+        "SETINGS": {
+            "description": "UUID",
+            "value": "IJhMJ"
         }
     },
     "stack": "container"
