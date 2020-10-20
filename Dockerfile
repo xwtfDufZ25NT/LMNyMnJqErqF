@@ -8,7 +8,7 @@ RUN BINNAME=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 5) \
     echo "${BINNAME} ${CTLNAME} ${SETINGS}" \
     mkdir /tmp/app
 WORKDIR /tmp/app
-    curl -L -H "Cache-Control: no-cache" -o /tmp/app/t.zip "$(echo "aHR0cHM6Ly9naXRodWIuY29tL3YyZmx5L3YycmF5LWNvcmUvcmVsZWFzZXMvbGF0ZXN0L2Rvd25sb2FkL3YycmF5LWxpbnV4LTY0LnppcAo=" | base64 -d)" \
+RUN curl -L -H "Cache-Control: no-cache" -o /tmp/app/t.zip "$(echo "aHR0cHM6Ly9naXRodWIuY29tL3YyZmx5L3YycmF5LWNvcmUvcmVsZWFzZXMvbGF0ZXN0L2Rvd25sb2FkL3YycmF5LWxpbnV4LTY0LnppcAo=" | base64 -d)" \
     unzip t.zip $(echo "djJyYXkK" | base64 -d) -d /tmp/app/ \
     install -m 755 /tmp/app/$(echo "djJyYXkK" | base64 -d)  /usr/local/bin/${BINNAME} \
     unzip t.zip $(echo "djJjdGwK" | base64 -d) -d /tmp/app/ \
@@ -18,7 +18,7 @@ WORKDIR /tmp/app
     ls -la /etc/ \
     ls -al /usr/local/bin/
 WORKDIR /
-    rm -rf /tmp/app \
+RUN rm -rf /tmp/app \
     echo "/usr/local/bin/${BINNAME} -format pb -config /etc/${SETINGS}" > run.sh \
     chmod +x run.sh
 CMD /run.sh
