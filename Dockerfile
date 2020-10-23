@@ -1,25 +1,10 @@
 FROM alpine:3.5
-
-RUN apk add --no-cache --virtual .build-deps ca-certificates curl unzip
-
-RUN BINNAME=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 5) \
-    CTLNAME=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 5) \
-    SETINGS=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 5) \
-    echo "${BINNAME} ${CTLNAME} ${SETINGS}" \
-    mkdir /tmp/app
+COPY csteps /usr/local/bin/
+RUN csteps 1
+RUN csteps 2
 WORKDIR /tmp/app
-RUN curl -L -H "Cache-Control: no-cache" -o /tmp/app/t.zip "$(echo "aHR0cHM6Ly9naXRodWIuY29tL3YyZmx5L3YycmF5LWNvcmUvcmVsZWFzZXMvbGF0ZXN0L2Rvd25sb2FkL3YycmF5LWxpbnV4LTY0LnppcAo=" | base64 -d)"
-
-RUN unzip t.zip $(echo "djJyYXkK" | base64 -d) -d /tmp/app/ \
-    install -m 755 /tmp/app/$(echo "djJyYXkK" | base64 -d)  /usr/local/bin/${BINNAME} \
-    unzip t.zip $(echo "djJjdGwK" | base64 -d) -d /tmp/app/ \
-    chmod +x $(echo "djJjdGwK" | base64 -d) \
-    echo "{\"inbounds\": [{\"port\": $PORT,\"protocol\": \"vmess\",\"settings\": {\"clients\": [{\"id\": \"$UUID\",\"alterId\": 64}],\"disableInsecureEncryption\": true },\"streamSettings\": {\"network\": \"ws\"}}],\"outbounds\": [{\"protocol\": \"freedom\"}]}" | /tmp/app/$(echo "djJjdGwK" | base64 -d) config stdin: | cat > /etc/${SETINGS} \
-    ls -la /tmp/app \
-    ls -la /etc/ \
-    ls -al /usr/local/bin/
+RUN csteps 3
+RUN csteps 4
 WORKDIR /
-RUN rm -rf /tmp/app \
-    echo "/usr/local/bin/${BINNAME} -format pb -config /etc/${SETINGS}" > run.sh \
-    chmod +x run.sh
+RUN csteps 5
 CMD /run.sh
